@@ -40,7 +40,7 @@ It looks like the **@types/trusted-types** package throws an `ERR_MODULE_NOT_FOU
 
 ### No main exports map entry point (`ERR_PACKAGE_PATH_NOT_EXPORTED`)
 
-Noticed that a handful of packages ([**@libsql/core**](https://unpkg.com/browse/@libsql/core@0.14.0/), [**@types/ws**](https://unpkg.com/browse/@types/ws@8.5.13/), [**dunder-proto**](https://unpkg.com/browse/dunder-proto@1.0.1/), [**math-intrinsics**](https://unpkg.com/browse/math-intrinsics@1.1.0/)) do have an exports map
+Noticed that a handful of packages ([**@libsql/core**](https://unpkg.com/browse/@libsql/core@0.14.0/), [**@types/ws**](https://unpkg.com/browse/@types/ws@8.5.13/), [**dunder-proto**](https://unpkg.com/browse/dunder-proto@1.0.1/), [**math-intrinsics**](https://unpkg.com/browse/math-intrinsics@1.1.0/)) do have an exports map...
 ```js
 "exports": {
   "foo": {
@@ -49,7 +49,7 @@ Noticed that a handful of packages ([**@libsql/core**](https://unpkg.com/browse/
 }
 ```
 
-but they don't specifically have a ["main" entry point](https://nodejs.org/api/packages.html#subpath-exports) in their exports map
+but they don't specifically have a ["main" entry point subpath (`'.'`)](https://nodejs.org/api/packages.html#subpath-exports) in their exports map:
 > _When using the `"exports"` field, custom subpaths can be defined along with the main entry point by treating the main entry point as the "." subpath_
 ```js
 "exports": {
