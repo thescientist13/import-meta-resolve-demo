@@ -43,8 +43,8 @@ It looks like the **@types/trusted-types** package throws an `ERR_MODULE_NOT_FOU
 Noticed that a handful of packages ([**@libsql/core**](https://unpkg.com/browse/@libsql/core@0.14.0/), [**@types/ws**](https://unpkg.com/browse/@types/ws@8.5.13/), [**dunder-proto**](https://unpkg.com/browse/dunder-proto@1.0.1/), [**math-intrinsics**](https://unpkg.com/browse/math-intrinsics@1.1.0/)) do have an exports map...
 ```js
 "exports": {
-  "foo": {
-
+  "./foo": {
+    "...": "..."
   }
 }
 ```
@@ -54,8 +54,8 @@ but they don't specifically have a ["main" entry point subpath (`'.'`)](https://
 ```js
 "exports": {
   ".": "./index.js",
-  "foo": {
-
+  "./foo": {
+    "...": "..."
   }
 }
 ```
