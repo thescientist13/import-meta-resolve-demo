@@ -37,3 +37,11 @@ It looks like the **@types/trusted-types** package throws an `ERR_MODULE_NOT_FOU
   code: 'ERR_MODULE_NOT_FOUND'
 }
 ```
+
+### Node Built-ins Hijacking Dependencies
+
+Noticed that when resolved the [**process**](https://unpkg.com/browse/process@0.11.10/) package, `import.meta.resolve` resolves to the NodeJS built-in version
+
+```sh
+✅ SUCCESS: resolved process at location => node:process ({ isNodeBuiltIn: true })
+```
