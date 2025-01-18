@@ -38,6 +38,46 @@ It looks like the **@types/trusted-types** package throws an `ERR_MODULE_NOT_FOU
 }
 ```
 
+### No main exports map entry point (`ERR_PACKAGE_PATH_NOT_EXPORTED`)
+
+Noticed that a handful of packages ([**@libsql/core**](https://unpkg.com/browse/@libsql/core@0.14.0/), [**@types/ws**](https://unpkg.com/browse/@types/ws@8.5.13/), [**dunder-proto**](https://unpkg.com/browse/dunder-proto@1.0.1/), [**math-intrinsics**](https://unpkg.com/browse/math-intrinsics@1.1.0/)) do have an exports map
+```js
+"exports": {
+  "foo": {
+
+  }
+}
+```
+
+but they don't specifically have a ["main" entry point](https://nodejs.org/api/packages.html#subpath-exports) in their exports map
+> _When using the `"exports"` field, custom subpaths can be defined along with the main entry point by treating the main entry point as the "." subpath_
+```js
+"exports": {
+  ".": "./index.js",
+  "foo": {
+
+  }
+}
+```
+
+And so as a result, `import.meta.resolve` will return a `ERR_PACKAGE_PATH_NOT_EXPORTED` error
+
+```sh
+🚨 ERROR: could not resolve @libsql/core Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: No "exports" main defined in /Users/owenbuckley/Workspace/github/import-meta-resolve-demo/node_modules/@libsql/core/package.json
+    at exportsNotFound (node:internal/modules/esm/resolve:294:10)
+    at packageExportsResolve (node:internal/modules/esm/resolve:641:9)
+    at resolveExports (node:internal/modules/cjs/loader:591:36)
+    at Module._findPath (node:internal/modules/cjs/loader:668:31)
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1130:27)
+    at Function.resolve (node:internal/modules/helpers:187:19)
+    at file:///Users/owenbuckley/Workspace/github/import-meta-resolve-demo/index.js:17:15
+    at ModuleJob.run (node:internal/modules/esm/module_job:218:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:329:24)
+    at async loadESM (node:internal/process/esm_loader:34:7) {
+  code: 'ERR_PACKAGE_PATH_NOT_EXPORTED'
+}
+```
+
 ### Node Built-ins Hijacking Dependencies
 
 Noticed that when resolved the [**process**](https://unpkg.com/browse/process@0.11.10/) package, `import.meta.resolve` resolves to the NodeJS built-in version
