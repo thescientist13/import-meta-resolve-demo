@@ -80,6 +80,8 @@ And so as a result, `import.meta.resolve` will return a `ERR_PACKAGE_PATH_NOT_EX
 
 ### Node Built-ins Hijacking Dependencies
 
+> Resolved - this is indeed the expected behavior - https://github.com/nodejs/node/issues/56652#issuecomment-2599803744
+
 Noticed that when resolved the [**process**](https://unpkg.com/browse/process@0.11.10/) package, `import.meta.resolve` resolves to the NodeJS built-in version
 
 ```sh
