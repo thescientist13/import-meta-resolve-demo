@@ -11,7 +11,7 @@ for(const dependency of Object.keys(dependencies)) {
 
     console.log(`\n ${marker}: resolved ${dependency} at location => ${resolved} ({ isNodeBuiltIn: ${isNodeBuiltIn} })`);
   } catch(err) {
-    console.log(`\n ⚠️ WARNING: could not resolve ${dependency} using \`import.meta.url\`' falling back to \`require.resolve\` - `, err);
+    console.log(`\n ⚠️ WARNING: could not resolve ${dependency} using \`import.meta.resolve\`' falling back to \`require.resolve\` - `, err);
 
     try {
       const require = createRequire(import.meta.url);
